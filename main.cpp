@@ -10,9 +10,6 @@ using namespace std;
 
 int main() {
     cout << "Hello World!\n";
-    cout << sumc(1,2);
     cout << CustomText("red", red, black, "");
     return 0;
 }
-
-

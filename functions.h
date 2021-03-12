@@ -24,13 +24,9 @@ underline off    24
 inverse off      27
 */
 
-int sumc(int a, int b)
-{
-    return a + b;
-}
 
 string CustomText(string input, colors Fcolor, colors Bcolor,  string options)
-    
+
 {
 string result = "\033[";
 
@@ -92,4 +88,3 @@ result += "\033[0m\n";
 
 return result;
 }
-
