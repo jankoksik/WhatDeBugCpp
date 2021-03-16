@@ -8,6 +8,28 @@
 //string CustomText(string input, colors Fcolor, colors Bcolor,  string options);
 using namespace std;
 
+#if defined(_WIN32)
+#define WIN32_LEAN_AND_MEAN
+#define VC_EXTRALEAN
+#include <Windows.h>
+#else
+#include <sys/ioctl.h>
+#endif
+
+void get_terminal_size(int& width, int& height) {
+#if defined(_WIN32)
+    CONSOLE_SCREEN_BUFFER_INFO csbi;
+    GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
+    width = (int)(csbi.srWindow.Right-csbi.srWindow.Left+1);
+    height = (int)(csbi.srWindow.Bottom-csbi.srWindow.Top+1);
+#else
+    struct winsize w;
+    ioctl(fileno(stdout), TIOCGWINSZ, &w);
+    width = (int)(w.ws_col);
+    height = (int)(w.ws_row);
+#endif
+}
+
 #define GFX_WIDTH
 
 
@@ -29,6 +51,8 @@ void refresh_screen() {
 
 int main() {
     int x = 5, y = 5;
+    int width=0, height=0;
+    get_terminal_size(width, height);
 
     /*while(1) {
         clear_buffer();
