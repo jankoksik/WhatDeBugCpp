@@ -3,8 +3,6 @@
 #include <unistd.h>
 #include "functions.h"
 
-
-
 #if defined(_WIN32)
 #define WIN32_LEAN_AND_MEAN
 #define VC_EXTRALEAN
@@ -40,11 +38,11 @@ public:
   }
 
   void put_char(int x, int y, char c) {
-      gfx[x+y*80] = c;
+      gfx[x+y*width] = c;
   }
 
   void clear_buffer() {
-      for(int i = 0; i < 80*25; i += 1)
+      for(int i = 0; i < width*height; i += 1)
           gfx[i] = ' ';
   }
 
@@ -61,13 +59,13 @@ int main() {
     int x = 5, y = 5;
     int width=0, height=0;
     get_terminal_size(width, height);
-    char* sss;
+    char* sss = "x";
 
     GfxBuffer gfx(width, height);
 
     while(1) {
         gfx.clear_buffer();
-        gfx.put_char(x, y, 219);
+        gfx.put_char(x, y, 's');
         x += 1;
         y += 1;
         gfx.refresh_screen();
@@ -79,7 +77,6 @@ int main() {
 
     return 0;
 }
-
 
 /*int main() {
     cout << "Hello World!\n";
