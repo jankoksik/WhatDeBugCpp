@@ -59,7 +59,7 @@ int main() {
     int x = 5, y = 5;
     int width=0, height=0;
     get_terminal_size(width, height);
-    char* sss = "x";
+    char* sss = new char[64];
 
     GfxBuffer gfx(width, height);
 
