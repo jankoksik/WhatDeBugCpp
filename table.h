@@ -50,7 +50,23 @@ class Table
    	 *
    	 * @param input_data
    	 */
-   	virtual void flatTable(vector<vector<wstring>> &input_data);
+   void flatTable(vector<vector<wstring>> &input_data){
+     //local variables
+     int LoopCounter = 0;
+     int rowCounter = 0;
+     int longestRow = 0;
+     bool FRun = true;
+
+     for(vector<wstring> input_datum  : input_data)
+     {
+       if(input_datum.size() > longestRow)
+       {
+         longestRow = input_datum.size();
+       }
+     }
+
+
+   }
 
    private:
    	static int getColumnWidth(vector<vector<wstring>> &input_data, int col);
