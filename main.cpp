@@ -1,12 +1,9 @@
 #include <iostream>
 #include <stdio.h>
-#include <sys/ioctl.h>
 #include <unistd.h>
 #include "functions.h"
 
-//int sumc(int a, int b);
-//string CustomText(string input, colors Fcolor, colors Bcolor,  string options);
-using namespace std;
+
 
 #if defined(_WIN32)
 #define WIN32_LEAN_AND_MEAN
@@ -15,6 +12,8 @@ using namespace std;
 #else
 #include <sys/ioctl.h>
 #endif
+
+using namespace std;
 
 void get_terminal_size(int& width, int& height) {
 #if defined(_WIN32)
@@ -63,11 +62,8 @@ int main() {
         gets(gfx);
     }*/
 
-    struct winsize w;
-    ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
-
-    printf ("lines %d\n", w.ws_row);
-    printf ("columns %d\n", w.ws_col);
+    printf ("lines %d\n", width);
+    printf ("columns %d\n", height);
 
     return 0;
 }
