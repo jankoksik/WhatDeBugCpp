@@ -23,8 +23,18 @@ class Table
      char upWing = '╩';
 
    public:
-   	Table();
-   	Table(int columns, int rows);
+   	Table(){
+      array[0][0] = "";
+    }
+   	Table(int columns, int rows){
+      for(int x=0; x<columns; x++){
+        for(int y=0; y<rows; y++)
+        {
+          array[x][y]="";
+        }
+      }
+
+    }
 
    	/**
    	 *  generate table with even columns
