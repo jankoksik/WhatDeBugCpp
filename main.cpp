@@ -29,38 +29,50 @@ void get_terminal_size(int& width, int& height) {
 #endif
 }
 
-#define GFX_WIDTH
+class GfxBuffer {
+public:
+  unsigned int width, height;
 
+  GfxBuffer(unsigned int w, unsigned int h) {
+    width = w;
+    height = h;
+    gfx = new char[width*height];
+  }
 
-char gfx[80*25];
+  void put_char(int x, int y, char c) {
+      gfx[x+y*80] = c;
+  }
 
-void put_char(int x, int y, char c) {
-    gfx[x+y*80] = c;
-}
+  void clear_buffer() {
+      for(int i = 0; i < 80*25; i += 1)
+          gfx[i] = ' ';
+  }
 
-void clear_buffer() {
-    for(int i = 0; i < 80*25; i += 1)
-        gfx[i] = ' ';
-}
+  void refresh_screen() {
+      printf("\033[2J\033[1;1H");
+      printf("%s", gfx);
+  }
 
-void refresh_screen() {
-    printf("\033[2J\033[1;1H");
-    printf("%s", gfx);
-}
+private:
+  char* gfx;
+};
 
 int main() {
     int x = 5, y = 5;
     int width=0, height=0;
     get_terminal_size(width, height);
+    char* sss;
 
-    /*while(1) {
-        clear_buffer();
-        put_char(x, y, 219);
+    GfxBuffer gfx(width, height);
+
+    while(1) {
+        gfx.clear_buffer();
+        gfx.put_char(x, y, 219);
         x += 1;
         y += 1;
-        refresh_screen();
-        gets(gfx);
-    }*/
+        gfx.refresh_screen();
+        gets(sss);
+    }
 
     printf ("lines %d\n", width);
     printf ("columns %d\n", height);
